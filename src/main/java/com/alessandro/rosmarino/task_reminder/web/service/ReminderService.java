@@ -22,6 +22,10 @@ public class ReminderService {
         reminderRepository.delete(reminder);
     }
 
+    public void deleteReminderById(Long id){
+        reminderRepository.deleteById(id);
+    }
+
     public Reminder getReminderById(Long id){
         Optional<Reminder> reminder = reminderRepository.findById(id);
         return reminder.orElseThrow(() -> new IllegalArgumentException("Invalid reminder Id:" + id));
