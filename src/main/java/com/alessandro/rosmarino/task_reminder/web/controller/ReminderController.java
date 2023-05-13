@@ -7,6 +7,7 @@ import com.alessandro.rosmarino.task_reminder.web.service.ReminderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,7 +43,7 @@ public class ReminderController {
         reminderToUpdate.setCreationDate(reminder.getCreationDate());
         reminderToUpdate.setReminderTime(reminder.getReminderTime());
         reminderToUpdate.setReminderText(reminder.getReminderText());
-        reminderToUpdate.setReminderWeekday(reminder.getReminderWeekday());
+        reminderToUpdate.setReminderWeekday(String.join(",",reminder.getReminderWeekday()));
         reminderToUpdate.setRecurring(reminder.getRecurring());
         reminderToUpdate.setDone(reminder.getDone());
         return reminderService.saveReminder(reminderToUpdate);
@@ -55,7 +56,15 @@ public class ReminderController {
 
     @GetMapping("/sendReminders")
     public void sendReminders() {
-        String mailBody = ReminderEmailBuilder.buildReminderList(getAllReminder());
+        LocalDate today = LocalDate.now();
+        String mailBody = ReminderEmailBuilder.buildReminderList(getRemindersByWeekday(today.getDayOfWeek().toString().toLowerCase()));
         mailSenderService.sendHTMLEmail("Your reminders for today", mailBody);
+    }
+
+    @GetMapping("/reminders/weekday/{weekday}")
+    public List<Reminder> getRemindersByWeekday(@PathVariable String weekday) {
+        List<Reminder> reminders = new ArrayList<>();
+        reminderService.getRemindersByWeekdayContaining(weekday).forEach(reminders::add);
+        return reminders;
     }
 }

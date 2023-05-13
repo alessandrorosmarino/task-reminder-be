@@ -1,6 +1,5 @@
 package com.alessandro.rosmarino.task_reminder.web.Entities;
 
-import com.alessandro.rosmarino.task_reminder.util.WeekdaysConverter;
 import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
 
@@ -19,15 +18,14 @@ public class Reminder {
     private LocalTime reminderTime;
     @Nonnull
     private String reminderText;
-    @Convert(converter = WeekdaysConverter.class)
-    private String[] reminderWeekday;
+    private String reminderWeekday;
     private Boolean isRecurring;
     private Boolean isDone;
 
     public Reminder() {
     }
 
-    public Reminder(@Nonnull LocalDateTime creationDate, @Nonnull LocalTime reminderTime, @Nonnull String reminderText, String[] reminderWeekday, Boolean isRecurring, Boolean isDone) {
+    public Reminder(@Nonnull LocalDateTime creationDate, @Nonnull LocalTime reminderTime, @Nonnull String reminderText, String reminderWeekday, Boolean isRecurring, Boolean isDone) {
         this.creationDate = creationDate;
         this.reminderTime = reminderTime;
         this.reminderText = reminderText;
@@ -69,10 +67,10 @@ public class Reminder {
     }
 
     public String[] getReminderWeekday() {
-        return reminderWeekday;
+        return reminderWeekday.split(",");
     }
 
-    public void setReminderWeekday(String[] reminderWeekday) {
+    public void setReminderWeekday(String reminderWeekday) {
         this.reminderWeekday = reminderWeekday;
     }
 

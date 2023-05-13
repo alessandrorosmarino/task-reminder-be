@@ -39,4 +39,8 @@ public class ReminderService {
         return reminderRepository.findAllByCreationDate(date);
     }
 
+    public Iterable<Reminder> getRemindersByWeekdayContaining(String weekday){
+        return reminderRepository.findAllByReminderWeekdayContaining(weekday);
+    }
+
 }

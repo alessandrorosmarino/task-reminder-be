@@ -10,4 +10,6 @@ import java.time.LocalDate;
 public interface ReminderRepository extends JpaRepository<Reminder, Long>{
 
     Iterable<Reminder> findAllByCreationDate(LocalDate date);
+
+    Iterable<Reminder> findAllByReminderWeekdayContaining(String weekday);
 }
