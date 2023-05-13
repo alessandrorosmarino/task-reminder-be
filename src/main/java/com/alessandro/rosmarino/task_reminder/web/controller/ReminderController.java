@@ -1,6 +1,8 @@
 package com.alessandro.rosmarino.task_reminder.web.controller;
 
+import com.alessandro.rosmarino.task_reminder.util.ReminderEmailBuilder;
 import com.alessandro.rosmarino.task_reminder.web.Entities.Reminder;
+import com.alessandro.rosmarino.task_reminder.web.service.MailSenderService;
 import com.alessandro.rosmarino.task_reminder.web.service.ReminderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +15,9 @@ public class ReminderController {
 
     @Autowired
     private ReminderService reminderService;
+
+    @Autowired
+    private MailSenderService mailSenderService;
 
     @GetMapping("/reminders")
     public List<Reminder> getAllReminder() {
@@ -46,5 +51,11 @@ public class ReminderController {
     @DeleteMapping("/reminders/{id}")
     public void deleteReminder(@PathVariable Long id) {
         reminderService.deleteReminderById(id);
+    }
+
+    @GetMapping("/sendReminders")
+    public void sendReminders() {
+        String mailBody = ReminderEmailBuilder.buildReminderList(getAllReminder());
+        mailSenderService.sendHTMLEmail("Your reminders for today", mailBody);
     }
 }
