@@ -9,8 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.alessandro.rosmarino</groupId>
-    <artifactId>Task_Reminder</artifactId>
-    <version>v1.0</version>
+    <artifactId>Reminder_Application_Server</artifactId>
     <name>Task Reminder</name>
     <description>Task Reminder</description>
     <properties>
