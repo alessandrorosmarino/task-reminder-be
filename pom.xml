@@ -10,6 +10,7 @@
     </parent>
     <groupId>com.alessandro.rosmarino</groupId>
     <artifactId>Reminder_Application_Server</artifactId>
+    <version>PRD</version>
     <name>Task Reminder</name>
     <description>Task Reminder</description>
     <properties>
