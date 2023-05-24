@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.alessandro.rosmarino</groupId>
     <artifactId>Task_Reminder</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>v1.0</version>
     <name>Task Reminder</name>
     <description>Task Reminder</description>
     <properties>
