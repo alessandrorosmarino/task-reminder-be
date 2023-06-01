@@ -30,6 +30,6 @@ public class TaskCorsConfiguration implements WebMvcConfigurer {
         registry.addMapping("/**")
                 .allowedMethods(CorsConfiguration.ALL)
                 .allowedHeaders(CorsConfiguration.ALL)
-                .allowedOriginPatterns("http://"+originAllowed);
+                .allowedOriginPatterns("http://"+originAllowed+"*");
     }
 }
