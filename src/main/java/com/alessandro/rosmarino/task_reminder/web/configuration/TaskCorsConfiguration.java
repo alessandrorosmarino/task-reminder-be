@@ -5,10 +5,11 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import java.net.DatagramSocket;
-import java.net.InetAddress;
-import java.net.SocketException;
-import java.net.UnknownHostException;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URL;
+
 
 @Configuration
 public class TaskCorsConfiguration implements WebMvcConfigurer {
@@ -16,10 +17,13 @@ public class TaskCorsConfiguration implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         String originAllowed = "localhost";
-        try (final DatagramSocket datagramSocket = new DatagramSocket()) {
-            datagramSocket.connect(InetAddress.getByName("8.8.8.8"), 12345);
-            originAllowed = datagramSocket.getLocalAddress().getHostAddress();
-        } catch (SocketException | UnknownHostException e) {
+        try {
+            URL ip = new URL("http://checkip.amazonaws.com");
+            BufferedReader bufferedReader = new BufferedReader(
+                    new InputStreamReader(ip.openStream())
+            );
+            originAllowed = bufferedReader.readLine();
+        } catch (IOException e) {
             e.printStackTrace();
         }
         System.out.println("ORIGIN: " + originAllowed);
