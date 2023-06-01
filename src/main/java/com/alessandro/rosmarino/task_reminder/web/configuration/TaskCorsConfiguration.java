@@ -13,6 +13,6 @@ public class TaskCorsConfiguration implements WebMvcConfigurer {
         registry.addMapping("/**")
                 .allowedMethods(CorsConfiguration.ALL)
                 .allowedHeaders(CorsConfiguration.ALL)
-                .allowedOrigins("http://localhost:6000");
+                .allowedOrigins(CorsConfiguration.ALL);
     }
 }
