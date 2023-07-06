@@ -16,17 +16,7 @@ public class TaskCorsConfiguration implements WebMvcConfigurer {
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        String originAllowed = "localhost";
-        try {
-            URL ip = new URL("http://checkip.amazonaws.com");
-            BufferedReader bufferedReader = new BufferedReader(
-                    new InputStreamReader(ip.openStream())
-            );
-            originAllowed = bufferedReader.readLine();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        System.out.println("ORIGIN: " + originAllowed);
+        String originAllowed = "alessandrorosmarino.com";
         registry.addMapping("/**")
                 .allowedMethods(CorsConfiguration.ALL)
                 .allowedHeaders(CorsConfiguration.ALL)
